@@ -1,0 +1,63 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Grow A Garden API",
+    "version": "1.0.0",
+    "description": "API for retrieving stock information from Grow A Garden"
+  },
+  "paths": {
+    "/api/stock/{type}": {
+      "get": {
+        "summary": "Get stock information by type",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "gear",
+                "egg",
+                "seeds",
+                "easter",
+                "night",
+                "honey",
+                "cosmetics"
+              ],
+              "description": "Type of stock to retrieve"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved stock data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid stock type provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid stock type"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

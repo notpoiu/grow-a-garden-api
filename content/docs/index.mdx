@@ -1,13 +1,27 @@
 ---
-title: Hello World
-description: Your first document
+title: What is this?
+description: What is this API about?
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+This API is a fast and easy way to access grow a garden data via a RESTful API. The data is fetched from [growagarden.gg](https://growagarden.gg) which allows us to operate without using bots or manual labour. This helps provide the most comprehensive local setup.
 
-## What is Next?
-
+### Getting started
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+  <Card title="Getting the current stock" href="/docs/api/stock/type/get" />
 </Cards>
+
+
+### How it works?
+Under the hood, the API uses [nextjs](https://nextjs.org/)'s `unstable_cache` function to cache the data for how much time there is left before the we would need to invalidate the cache (typically if its stock, we would invalidate it after each restock)
+
+<Mermaid
+  chart={`
+flowchart TD
+    A[API Request] --> B{Check Cache}
+    B -->|Valid| C[Return Cached Data]
+    B -->|Invalid/Expired| D[Send GET Request to growagarden.gg]
+    D --> E[Parse React Server Component]
+    E --> F[Cache via unstable_cache]
+    F --> G[Return Data]
+  `}
+/>

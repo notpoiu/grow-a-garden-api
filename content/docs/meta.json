@@ -1,0 +1,9 @@
+{
+  "pages": [
+    "---Introduction---",
+    "index",
+
+    "---Stock API---",
+    "api/stock/type/get"
+  ]
+}
