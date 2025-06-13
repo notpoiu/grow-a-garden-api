@@ -12,9 +12,9 @@ import { StockTypes } from "config.gag";
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { type: string } }
+  slug: { params: Promise<{ type: string }> }
 ) {
-  const { type } = await params;
+  const { type } = await slug.params;
 
   const StockData = StockTypes.find((stock) => stock.stock === type);
   if (!StockData) {
